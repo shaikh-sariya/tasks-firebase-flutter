@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tasks_app/screens/my_drawer.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../blocs/tasks_bloc.dart';
 import '../models/task.dart';
 import '../widgets/tasks_list.dart';
+import 'add_task_screen.dart';
 
-class TasksScreen extends StatelessWidget {
-  TasksScreen({super.key});
+class TasksScreen extends StatefulWidget {
+  const TasksScreen({super.key});
+  static const id = 'tasks_screen';
 
-  final TextEditingController titleController = TextEditingController();
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
 
+class _TasksScreenState extends State<TasksScreen> {
   void _addTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -17,27 +23,7 @@ class TasksScreen extends StatelessWidget {
         child: Container(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                const Text(
-                  'Add Task',
-                  style: TextStyle(fontSize: 24),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: titleController,
-                  decoration: const InputDecoration(
-                    label: Text('Title'),
-                    border: OutlineInputBorder(),
-                  ),
-                )
-              ],
-            ),
-          ),
+          child: const AddTaskScreen(),
         ),
       ),
     );
@@ -53,18 +39,19 @@ class TasksScreen extends StatelessWidget {
             title: const Text('Tasks App'),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () => _addTask(context),
                 icon: const Icon(Icons.add),
               )
             ],
           ),
+          drawer: MyDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
+              Center(
                 child: Chip(
                   label: Text(
-                    'Tasks:',
+                    '${state.allTasks.length}Tasks',
                   ),
                 ),
               ),
