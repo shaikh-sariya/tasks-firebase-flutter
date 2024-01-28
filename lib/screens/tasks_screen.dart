@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tasks_app/screens/my_drawer.dart';
 
-import '../blocs/bloc_exports.dart';
-import '../blocs/tasks_bloc.dart';
+import '../blocs/tasks_bloc/bloc_exports.dart';
+import '../blocs/tasks_bloc/tasks_bloc.dart';
 import '../models/task.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
@@ -40,7 +40,9 @@ class _TasksScreenState extends State<TasksScreen> {
             actions: [
               IconButton(
                 onPressed: () => _addTask(context),
-                icon: const Icon(Icons.add),
+                icon: const Icon(
+                  Icons.add,
+                ),
               )
             ],
           ),

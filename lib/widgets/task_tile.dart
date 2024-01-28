@@ -1,4 +1,4 @@
-import '../blocs/bloc_exports.dart';
+import '../blocs/tasks_bloc/bloc_exports.dart';
 import '../models/task.dart';
 import 'package:flutter/material.dart';
 
@@ -26,9 +26,11 @@ class TaskTile extends StatelessWidget {
       ),
       trailing: Checkbox(
         value: task.isDone,
-        onChanged: (value) {
-          context.read<TasksBloc>().add(UpdateTask(task: task));
-        },
+        onChanged: task.isDeleted == false
+            ? (value) {
+                context.read<TasksBloc>().add(UpdateTask(task: task));
+              }
+            : null,
       ),
       onLongPress: () => _removedOrDeleteTask(context, task),
     );

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tasks_app/blocs/switch_bloc/switch_bloc.dart';
 import 'package:flutter_tasks_app/screens/tasks_screen.dart';
 import 'package:flutter_tasks_app/services/app_router.dart';
+import 'package:flutter_tasks_app/services/app_theme.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'blocs/bloc_exports.dart';
+import 'blocs/tasks_bloc/bloc_exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,18 +24,26 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key, required this.appRouter}) : super(key: key);
   final AppRouter appRouter;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TasksBloc(),
-      child: MaterialApp(
-        title: 'Flutter Tasks App',
-        theme: ThemeData(
-          colorSchemeSeed: Colors.blue,
-        ),
-        home: const TasksScreen(),
-        onGenerateRoute: appRouter.onGenerateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => TasksBloc()),
+        BlocProvider(create: (context) => SwitchBloc()),
+      ],
+      child: BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Flutter Tasks App',
+            theme: state.switchValue
+                ? AppThemes.appThemeData[AppTheme.darkTheme]
+                : AppThemes.appThemeData[AppTheme.lightTheme],
+            home: const TasksScreen(),
+            onGenerateRoute: appRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
+import 'package:flutter_tasks_app/blocs/tasks_bloc/bloc_exports.dart';
 
-import '../models/task.dart';
+import '../../models/task.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';

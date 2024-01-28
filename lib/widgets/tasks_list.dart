@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tasks_app/blocs/bloc_exports.dart';
-import 'package:flutter_tasks_app/blocs/tasks_bloc.dart';
+import 'package:flutter_tasks_app/blocs/tasks_bloc/bloc_exports.dart';
+import 'package:flutter_tasks_app/blocs/tasks_bloc/tasks_bloc.dart';
 
 import '../models/task.dart';
 import 'task_tile.dart';
