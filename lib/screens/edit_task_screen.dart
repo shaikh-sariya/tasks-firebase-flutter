@@ -5,21 +5,25 @@ import 'package:flutter_tasks_app/services/guid_gen.dart';
 import '../blocs/tasks_bloc/tasks_bloc.dart';
 import '../models/task.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({
+class EditTaskScreen extends StatelessWidget {
+  final Task oldTask;
+  const EditTaskScreen({
     super.key,
+    required this.oldTask,
   });
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController titleController =
+        TextEditingController(text: oldTask.title);
+    final TextEditingController descriptionController =
+        TextEditingController(text: oldTask.description);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           const Text(
-            'Add Task',
+            'Edit Task',
             style: TextStyle(fontSize: 24),
           ),
           const SizedBox(
@@ -51,20 +55,24 @@ class AddTaskScreen extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
+                child: const Text('cancel'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  var task = Task(
+                  var editedTask = Task(
                     title: titleController.text,
                     description: descriptionController.text,
-                    id: GUIDGen.generate(),
+                    id: oldTask.id,
+                    isDone: false,
+                    isFavorite: oldTask.isFavorite,
                     date: DateTime.now().toString(),
                   );
-                  context.read<TasksBloc>().add(AddTask(task: task));
+                  context
+                      .read<TasksBloc>()
+                      .add(EditTask(oldTask: oldTask, newTask: editedTask));
                   Navigator.pop(context);
                 },
-                child: const Text('Add'),
+                child: const Text('Save'),
               ),
             ],
           ),
