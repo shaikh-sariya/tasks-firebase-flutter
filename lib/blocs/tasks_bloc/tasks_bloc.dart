@@ -36,7 +36,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     List<Task> completedTasks = state.completedTasks;
     List<Task> favoriteTasks = state.favoriteTasks;
     if (task.isDone == false) {
-      if (task.isDone == false) {
+      if (task.isFavorite == false) {
         pendingTasks = List.from(pendingTasks)..remove(task);
         completedTasks.insert(0, task.copyWith(isDone: true));
       } else {
@@ -66,7 +66,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     emit(TasksState(
       pendingTasks: pendingTasks,
       completedTasks: completedTasks,
-      favoriteTasks: state.favoriteTasks,
+      favoriteTasks: favoriteTasks,
       removedTasks: state.removedTasks,
     ));
   }

@@ -62,7 +62,7 @@ class TaskTile extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 18,
-                            decoration: task.isDone!
+                            decoration: task.isDone
                                 ? TextDecoration.lineThrough
                                 : null),
                       ),

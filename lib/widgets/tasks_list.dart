@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tasks_app/blocs/tasks_bloc/bloc_exports.dart';
-import 'package:flutter_tasks_app/blocs/tasks_bloc/tasks_bloc.dart';
 
 import '../models/task.dart';
 import 'task_tile.dart';
@@ -15,8 +13,7 @@ class TasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Complete kaise hoga?
-    /// yeh work nhi krrhaa
+    // Hogaya ab ky kru aage video me continue kro okk
     return Expanded(
       child: SingleChildScrollView(
         child: ExpansionPanelList.radio(

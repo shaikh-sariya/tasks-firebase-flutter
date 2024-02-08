@@ -7,7 +7,7 @@ import 'package:flutter_tasks_app/screens/pending_screen.dart';
 import 'add_task_screen.dart';
 
 class TabsScreen extends StatefulWidget {
-  TabsScreen({super.key});
+  const TabsScreen({super.key});
   static const id = 'tabs_screen';
 
   @override
